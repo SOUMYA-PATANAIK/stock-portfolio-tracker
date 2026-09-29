@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stock Portfolio Tracker</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="icon">📈</div>
+
+        <h1>Stock Portfolio Tracker</h1>
+
+        <p>
+            Track your investments using predefined stock prices.
+        </p>
+    </header>
+
+
+    <!-- SUMMARY CARDS -->
+
+    <section class="summary-grid">
+
+        <div class="summary-card">
+            <div class="summary-icon">📦</div>
+
+            <div>
+                <span>Total Stocks</span>
+                <strong>{{ total_stocks }}</strong>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon">📊</div>
+
+            <div>
+                <span>Total Quantity</span>
+                <strong>{{ total_quantity }}</strong>
+            </div>
+        </div>
+
+
+        <div class="summary-card highlight">
+            <div class="summary-icon">💰</div>
+
+            <div>
+                <span>Total Investment</span>
+                <strong>₹{{ "{:,}".format(total_investment) }}</strong>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ADD STOCK -->
+
+    <section class="card">
+
+        <h2>➕ Add Investment</h2>
+
+        <form method="POST">
+
+            <div class="form-group">
+
+                <label>Select Stock</label>
+
+                <select name="stock" required>
+
+                    <option value="">
+                        Choose a stock
+                    </option>
+
+                    {% for stock, price in stock_prices.items() %}
+
+                    <option value="{{ stock }}">
+                        {{ stock }} — ₹{{ "{:,}".format(price) }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Quantity</label>
+
+                <input
+                    type="number"
+                    name="quantity"
+                    min="1"
+                    placeholder="Enter quantity"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+                Add to Portfolio
+            </button>
+
+        </form>
+
+
+        {% if message %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- PORTFOLIO -->
+
+    <section class="card">
+
+        <div class="section-header">
+
+            <h2>📋 Your Portfolio</h2>
+
+            {% if portfolio %}
+
+            <a href="{{ url_for('clear_portfolio') }}"
+               class="clear-btn">
+                Clear All
+            </a>
+
+            {% endif %}
+
+        </div>
+
+
+        {% if portfolio %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Investment</th>
+                        <th>Portfolio %</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for item in portfolio %}
+
+                    <tr>
+
+                        <td>
+                            <strong>{{ item.stock }}</strong>
+                        </td>
+
+                        <td>
+                            ₹{{ "{:,}".format(item.price) }}
+                        </td>
+
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+
+                        <td>
+                            ₹{{ "{:,}".format(item.investment) }}
+                        </td>
+
+                        <td>
+
+                            <div class="percentage">
+
+                                <div class="progress">
+
+                                    <div
+                                        class="progress-bar"
+                                        data-width="{{ item.percentage }}"
+                                    ></div>
+
+                                </div>
+
+                                <span>
+                                    {{ item.percentage }}%
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <a
+                                href="{{ url_for('remove_stock', index=loop.index0) }}"
+                                class="remove"
+                            >
+                                Remove
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="total">
+
+            <span>
+                Total Portfolio Value
+            </span>
+
+            <strong>
+                ₹{{ "{:,}".format(total_investment) }}
+            </strong>
+
+        </div>
+
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📊
+            </div>
+
+            <h3>Your portfolio is empty</h3>
+
+            <p>
+                Add your first stock investment above.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <footer>
+        Stock Portfolio Tracker • Built with Python & Flask
+    </footer>
+
+</div>
+
+
+<!-- PORTFOLIO BAR SCRIPT -->
+
+<script>
+    document.querySelectorAll(".progress-bar").forEach(function(bar) {
+        bar.style.width = bar.dataset.width + "%";
+    });
+</script>
+
+
+</body>
+
+</html>

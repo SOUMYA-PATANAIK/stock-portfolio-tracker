@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+/* HEADER */
+
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+
+/* SUMMARY */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.summary-card.highlight {
+    border: 2px solid #667eea;
+}
+
+.summary-icon {
+    font-size: 32px;
+}
+
+.summary-card span {
+    display: block;
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.summary-card strong {
+    font-size: 22px;
+    color: #333;
+}
+
+
+/* CARD */
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+
+/* FORM */
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+select,
+input {
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+select:focus,
+input:focus {
+    border-color: #667eea;
+}
+
+button {
+    padding: 13px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #667eea;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+/* MESSAGE */
+
+.message {
+    margin-top: 18px;
+    padding: 12px;
+    background: #eef2ff;
+    border-radius: 8px;
+    color: #444;
+}
+
+
+/* SECTION HEADER */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clear-btn {
+    padding: 9px 14px;
+    background: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 14px 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: #f5f6ff;
+    color: #555;
+    font-size: 13px;
+}
+
+td {
+    font-size: 14px;
+}
+
+.remove {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+
+/* PERCENTAGE */
+
+.percentage {
+    min-width: 100px;
+}
+
+.progress {
+    height: 6px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #667eea;
+    border-radius: 10px;
+}
+
+
+/* TOTAL */
+
+.total {
+    margin-top: 20px;
+    padding: 18px;
+    background: #f5f6ff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.total strong {
+    color: #667eea;
+}
+
+
+/* EMPTY */
+
+.empty {
+    text-align: center;
+    padding: 45px 20px;
+    color: #777;
+}
+
+.empty-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.empty h3 {
+    color: #444;
+    margin-bottom: 8px;
+}
+
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 20px 10px;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    th,
+    td {
+        padding: 10px 7px;
+        font-size: 12px;
+    }
+
+    .total {
+        font-size: 17px;
+    }
+}
